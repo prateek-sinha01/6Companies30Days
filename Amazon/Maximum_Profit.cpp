@@ -1,0 +1,28 @@
+//Problem link : https://practice.geeksforgeeks.org/problems/maximum-profit4657/1
+
+//Date : 10/01/2022
+//Time Complexity: O(N*K)
+//Auxiliary Space: O(N*K)
+
+class Solution{
+    public : 
+    int maxProfit(int k, int n, int a[]) 
+    {
+        // code here
+        int t[k+1][n];
+        for(int i=0;i<=k;i++)
+            t[i][0] = 0;
+        for(int j=0;j<n;j++)
+            t[0][j] = 0;
+        for(int i=1;i<=k;i++)
+        {
+            int maxi = INT_MIN;
+            for(int j=1;j<n;j++)
+            {
+                maxi = max(maxi,t[i-1][j-1]-a[j-1]);
+                t[i][j] = max(maxi+a[j],t[i][j-1]);
+            }
+        }
+        return t[k][n-1];
+    }
+};
